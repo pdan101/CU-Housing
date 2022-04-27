@@ -27,10 +27,9 @@ const TaskAddControl = () => {
         <Input
           value={input}
           type="text"
-          placeholder="Do the dishes..."
+          placeholder="Toni Morrison Hall..."
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button type="submit">Add Task</Button>
       </HStack>
     </form>
   )

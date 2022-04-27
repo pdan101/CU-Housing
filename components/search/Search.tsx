@@ -6,7 +6,7 @@ import { db } from "../../util/firebase"
 import TaskAddControl from "./TaskAddControl"
 import TaskList from "./TaskList"
 
-const FrodoHeading = () => (
+const SearchHeading = () => (
   <Heading
     as="h1"
     w="fit-content"
@@ -14,13 +14,13 @@ const FrodoHeading = () => (
     bgClip="text"
     lineHeight={1.33}
   >
-    Frodo: My Todo List
+    Housing Search
   </Heading>
 )
 
 const taskQuery = query(collection(db, 'tasks'))
 
-const Frodo = () => {
+const Search = () => {
   const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
 
   // Subscribes to `taskQuery`
@@ -38,11 +38,11 @@ const Frodo = () => {
 
   return (
     <VStack spacing={4}>
-      <FrodoHeading />
+      <SearchHeading />
       <TaskAddControl />
       {tasks ? <TaskList tasks={tasks} /> : <Spinner />}
     </VStack>
   )
 }
 
-export default Frodo
+export default Search

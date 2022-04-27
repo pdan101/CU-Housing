@@ -12,7 +12,7 @@ const TaskList = ({ tasks }: Props) => {
       {tasks.length ? (
         tasks.map((task) => <TaskItem key={task.id} task={task} />)
       ) : (
-        <Text>The list is looking kinda empty 👀</Text>
+        <Text>No results matched the search.</Text>
       )}
     </VStack>
   )
