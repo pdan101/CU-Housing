@@ -1,10 +1,18 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react"
-import { collection, onSnapshot, query } from "firebase/firestore"
-import { useEffect, useState } from "react"
-import { Task, TaskWithId } from "../../types"
+import { Button, Heading, HStack, Input, Spinner, VStack } from "@chakra-ui/react"
+import { addDoc, collection } from "firebase/firestore"
+import { FormEventHandler, useState } from "react"
+import { Location } from "../../types"
 import { db } from "../../util/firebase"
-import TaskAddControl from "./TaskAddControl"
-import TaskList from "./TaskList"
+import LocationList from "./LocationList"
+
+const locationList : Location[] = [
+  {
+    id: "1",
+    name: "Toni Morrison Hall",
+    region: "North Campus",
+    address: "Cornell University, 18 Sisson Pl, Ithaca, NY 14850"
+  }
+]
 
 const SearchHeading = () => (
   <Heading
@@ -18,30 +26,27 @@ const SearchHeading = () => (
   </Heading>
 )
 
-const taskQuery = query(collection(db, 'tasks'))
-
 const Search = () => {
-  const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
+  const [input, setInput] = useState("")
 
-  // Subscribes to `taskQuery`
-  // We define a function to run whenever the query result changes
-  useEffect(() => {
-    const unsubscribe = onSnapshot(taskQuery, (querySnapshot) => {
-      const taskList : TaskWithId[] = querySnapshot.docs.map(doc => {
-        const task : TaskWithId = {...(doc.data() as Task), id: doc.id}
-        return task
-      })
-      setTasks(taskList)
-    })
-    return unsubscribe
-  }, [])
+  const searchLocation = (e: { target: { value: string } }) => {
+    setInput(e.target.value)
+  }
+
+  const locations = locationList.filter(x => input.length && (x.name.toLowerCase().includes(input.toLowerCase()) || x.region.toLowerCase().includes(input.toLowerCase())))
 
   return (
     <VStack spacing={4}>
       <SearchHeading />
-      <TaskAddControl />
-      {tasks ? <TaskList tasks={tasks} /> : <Spinner />}
+      <Input
+        value={input}
+        type="text"
+        placeholder="Toni Morrison Hall..."
+        onChange={searchLocation}
+      />
+      {locations ? <LocationList locations={locations} /> : <Spinner />}
     </VStack>
+      
   )
 }
 
