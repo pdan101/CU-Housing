@@ -4,15 +4,9 @@ import { FormEventHandler, useState } from "react"
 import { Location } from "../../types"
 import { db } from "../../util/firebase"
 import LocationList from "./LocationList"
+import locationList from "../../util/locationList"
 
-const locationList : Location[] = [
-  {
-    id: "1",
-    name: "Toni Morrison Hall",
-    region: "North Campus",
-    address: "Cornell University, 18 Sisson Pl, Ithaca, NY 14850"
-  }
-]
+
 
 const SearchHeading = () => (
   <Heading

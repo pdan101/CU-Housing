@@ -19,11 +19,6 @@ const SearchHeading = () => (
 
 //const locationQuery = query(collection(db, 'locations'))
 const locationList : Location[]= [
-  {
-    id: "1",
-    name: "Toni Morrison Hall",
-    region: "North Campus"
-  }
 ]
 const Search2 = () => {
   const [locations, setLocations] = useState<Location[] | null>(null)
