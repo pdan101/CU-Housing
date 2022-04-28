@@ -4,7 +4,7 @@ import { FormEventHandler, useState } from "react"
 import { Location } from "../../types"
 import { db } from "../../util/firebase"
 import LocationList from "./LocationList"
-import locationList from "../../util/locationList"
+import locationList from "../../locationList"
 
 
 
