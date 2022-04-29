@@ -1,0 +1,20 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+.review {
+    display:inline-block;
+    margin: 1%;
+    border: 3px solid black;
+    border-radius:7px;
+}
+
+.reviewHeader {
+    display:flex;
+    flex-direction: row;
+}
+
+.reviewerName {
+    align-self: end;
+}
