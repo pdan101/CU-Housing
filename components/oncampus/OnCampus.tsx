@@ -1,9 +1,9 @@
 import { Heading, Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
-import { Task, TaskWithId } from "../../types"
 import { db } from "../../util/firebase"
-import Dorms from "./Dorms"
+import locationList from "../../locationList"
+import DormList from "./DormList"
 
 const OnCampusHeading = () => (
   <Heading
@@ -17,7 +17,7 @@ const OnCampusHeading = () => (
   </Heading>
 )
 
-const taskQuery = query(collection(db, 'tasks'))
+//const taskQuery = query(collection(db, 'tasks'))
 
 const OnCampus = () => {
   // const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
@@ -35,9 +35,14 @@ const OnCampus = () => {
   //   return unsubscribe
   // }, [])
 
+  const dorms = locationList.filter((x) => {
+    return ['North Campus', 'West Campus', 'South Campus'].includes(x.region)
+  })
+
   return (
     <VStack spacing={4}>
       <OnCampusHeading />
+      {dorms ? <DormList dorms={dorms} /> : <Spinner />}
     </VStack>
   )
 }

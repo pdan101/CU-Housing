@@ -3,6 +3,7 @@ export type Location = {
   name: string
   region: string
   address: string
+  img: string
 }
 
 export type Review = {
