@@ -3,7 +3,7 @@ import { Location } from "./types"
 const locationList : Location[] = [
     {
       name: "Morrison",
-      id: "tmh",
+      id: "morrison",
       region: "North Campus",
       address: "Cornell University, 18 Sisson Pl, Ithaca, NY 14850",
       img: "https://news.cornell.edu/sites/default/files/styles/full_size/public/2021-09/0922_green3.jpg?itok=3FQUEsPj"
