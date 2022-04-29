@@ -10,11 +10,35 @@
     border-radius:7px;
 }
 
-.reviewHeader {
+.header {
     display:flex;
     flex-direction: row;
 }
 
 .reviewerName {
     align-self: end;
+}
+
+img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.headerTitle {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.AboutMap {
+    display:flex;
+    flex-direction: row;
+}
+
+.Map {
+    border: black solid 5px;
+    width:40%;
+}
+
+.left {
+    width: 60%;
 }
