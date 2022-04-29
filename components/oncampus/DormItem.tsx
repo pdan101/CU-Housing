@@ -30,6 +30,9 @@ const DormItem = ({ dorm: { id, name, region, address, img } }: Props) => {
         src = {img}
       ></Image>
       </Link>
+      <Text>
+      ✥-----------------✥---------------✥-----------------✥---------------✥
+      </Text>
     </VStack>
   )
 }

@@ -11,7 +11,7 @@ const SearchHeading = () => (
     bgClip="text"
     lineHeight={1.33}
   >
-    Availale Sublets & Leases
+    Available Sublets & Leases
   </Heading>
 )
 
