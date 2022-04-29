@@ -17,6 +17,18 @@ const navData: NavLinkData[] = [
     name: "Housing Search",
     path: "/search",
   },
+  {
+    name: "On-Campus",
+    path: "/oncampus"
+  },
+  {
+    name: "Off-Campus",
+    path: "/offcampus"
+  },
+  {
+    name: "Sublets & Leases", 
+    path: "/subletsleases"
+  }
 ]
 
 const NavLink = ({ name, path }: NavLinkData) => {
