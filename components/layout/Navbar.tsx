@@ -28,10 +28,6 @@ const navData: NavLinkData[] = [
   {
     name: "Sublets & Leases", 
     path: "/subletsleases"
-  },
-  {
-    name: "Example Toni Morrison Page",
-    path: "/morrison"
   }
 ]
 

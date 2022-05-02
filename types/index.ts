@@ -4,10 +4,18 @@ export type Location = {
   region: string
   address: string
   img: string
+  description: string
+  amenities: string[]
 }
 
 export type Review = {
-  name: string
+  id: string
   date: string
   locationID: string
+  author: string
+  recommend: boolean
+  pros: string[]
+  cons: string[]
+  rating: number
+  text: string
 }
