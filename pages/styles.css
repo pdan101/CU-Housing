@@ -1,17 +1,17 @@
 * {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .review {
-    display:inline-block;
+    display: inline-block;
     margin: 1%;
     border: 3px solid black;
-    border-radius:7px;
+    border-radius: 7px;
 }
 
 .header {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
@@ -30,13 +30,14 @@ img {
 }
 
 .AboutMap {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
 .Map {
     border: black solid 5px;
-    width:40%;
+    width: 40%;
+    height: 100%;
 }
 
 .left {
