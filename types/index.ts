@@ -18,4 +18,6 @@ export type Review = {
   cons: string[]
   rating: number
   text: string
+  okToContact: boolean
+  email: string
 }
