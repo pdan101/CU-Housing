@@ -2,8 +2,8 @@ import { Location, Review } from "../../types";
 import About from "./About";
 import Amenities from "./Amenities";
 import InfoHeader from "./InfoHeader";
-import Map from "./Map"
 import ReviewItem from "./ReviewItem"
+import WrappedMap from "./WrappedMap";
 
 type Props = {
     readonly dorm: Location
@@ -19,7 +19,12 @@ function ReviewsList({dorm, reviews} : Props) {
         <About description={dorm.description}></About>
         <Amenities amenities={dorm.amenities}></Amenities>
         </article>
-        <Map></Map>
+        <WrappedMap
+          googleMapURL=
+          {'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBHognjaO3IFJcCGchpEZMDGnnVMuDV_eY'}
+          containerElement={<div style={{ height: "300px", width: "50%" }} />}
+          mapElement={<div style={{ height: "100%", width: "100%" }} />}
+          loadingElement={<div style={{ height: "100%", width: "100%" }} />}></WrappedMap>
       </div>
       <h1 className="headerTitle">Reviews</h1>
       {reviews.map(data => {
