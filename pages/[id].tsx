@@ -3,6 +3,7 @@ import locationList from "../locationList"
 import reviewList from "../reviewList"
 import { Location, Review } from "../types/index"
 import { Checkbox, HStack, IconButton, Link, Text } from "@chakra-ui/react"
+import ReviewForm from "./reviewForm"
 import Info from "../components/oncampus/Info"
 
 
@@ -15,6 +16,7 @@ export default function Dorm({ locationData } : Props) {
     return (
         <Layout title={locationData.name}>
             <Info dorm={locationData} reviews={relevantReviews}></Info>
+            <ReviewForm></ReviewForm>
         </Layout>
     )
 }
