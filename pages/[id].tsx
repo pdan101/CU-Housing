@@ -1,6 +1,7 @@
 import Layout from "../components/layout/Layout"
 import { Location, LocationWithoutID, Review, ReviewWithoutID } from "../types/index"
 import { Checkbox, HStack, IconButton, Link, Text } from "@chakra-ui/react"
+import ReviewForm from "../components/review/reviewForm"
 import Info from "../components/oncampus/Info"
 import { db } from "../util/firebase"
 import { collection, FieldPath, getDocs, query, where } from "firebase/firestore"
@@ -29,6 +30,7 @@ export default function Dorm({ locationData } : Props) {
     return (
         <Layout title={locationData.name}>
             <Info dorm={locationData} reviews={reviews ? reviews : []}></Info>
+            <ReviewForm></ReviewForm>
         </Layout>
     )
 }

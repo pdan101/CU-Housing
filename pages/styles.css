@@ -42,3 +42,8 @@ img {
 .left {
     width: 60%;
 }
+
+.stars {
+    display:inline;
+    background-color: black;
+}
