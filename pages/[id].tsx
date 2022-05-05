@@ -3,7 +3,7 @@ import locationList from "../locationList"
 import reviewList from "../reviewList"
 import { Location, Review } from "../types/index"
 import { Checkbox, HStack, IconButton, Link, Text } from "@chakra-ui/react"
-import ReviewForm from "./reviewForm"
+import ReviewForm from "../components/review/reviewForm"
 import Info from "../components/oncampus/Info"
 
 

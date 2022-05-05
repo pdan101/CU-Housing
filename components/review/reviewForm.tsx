@@ -1,8 +1,8 @@
 import {FormControl, FormLabel, RadioGroup, HStack, Radio, Button, 
         FormErrorMessage, FormHelperText, Input} from '@chakra-ui/react'
 import React, { useState, FormEventHandler } from 'react'
-import { Location } from "../types/index"
-import { db } from "../util/firebase"
+import { Location } from "../../types/index"
+import { db } from "../../util/firebase"
 import { stringify } from 'querystring'
 import { addDoc, collection } from 'firebase/firestore'
 import { Rating } from 'react-simple-star-rating'
