@@ -1,10 +1,9 @@
 import { Button, Heading, HStack, Input, Spinner, VStack } from "@chakra-ui/react"
-import { addDoc, collection } from "firebase/firestore"
-import { FormEventHandler, useState } from "react"
-import { Location } from "../../types"
+import { addDoc, collection, getDocs, query } from "firebase/firestore"
+import { Dispatch, FormEventHandler, SetStateAction, useEffect, useState } from "react"
+import { Location, LocationWithoutID } from "../../types"
 import { db } from "../../util/firebase"
 import LocationList from "./LocationList"
-import locationList from "../../locationList"
 
 
 
@@ -22,12 +21,26 @@ const SearchHeading = () => (
 
 const Search = () => {
   const [input, setInput] = useState("")
+  const [locations, setLocations] = useState<Location[] | null>(null)
 
   const searchLocation = (e: { target: { value: string } }) => {
     setInput(e.target.value)
+    retrieveLocations()
   }
+  async function retrieveLocations() {
+    const locationQuery = query(collection(db, 'locations'))
+    const querySnapshot = await getDocs(locationQuery)
+    const locationList : Location[] = querySnapshot.docs.map(doc => {
+      const location: Location = {...(doc.data() as LocationWithoutID), id: doc.id}
+      return location
+    }) 
+    console.log(locationList)
+    setLocations(locationList.filter(x => input.length && (x.name.toLowerCase().includes(input.toLowerCase()) || x.region.toLowerCase().includes(input.toLowerCase()))))
+  } 
 
-  const locations = locationList.filter(x => input.length && (x.name.toLowerCase().includes(input.toLowerCase()) || x.region.toLowerCase().includes(input.toLowerCase())))
+  useEffect(() => {
+    retrieveLocations()
+  }, [])
 
   return (
     <VStack spacing={4}>

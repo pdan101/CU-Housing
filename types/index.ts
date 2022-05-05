@@ -1,15 +1,19 @@
-export type Location = {
-  id: string
+export type LocationWithoutID = {
   name: string
   region: string
   address: string
   img: string
   description: string
   amenities: string[]
+  long: number
+  lat: number
 }
 
-export type Review = {
+export type Location = LocationWithoutID & {
   id: string
+}
+
+export type ReviewWithoutID = {
   date: string
   locationID: string
   author: string
@@ -18,4 +22,8 @@ export type Review = {
   cons: string[]
   rating: number
   text: string
+}
+
+export type Review = ReviewWithoutID & {
+  id: string
 }

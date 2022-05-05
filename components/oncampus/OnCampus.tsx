@@ -1,9 +1,11 @@
 import { Heading, HStack, Spinner, StackDivider, VStack } from "@chakra-ui/react"
-import { collection, onSnapshot, query } from "firebase/firestore"
+import { collection, getDocs, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../util/firebase"
 import locationList from "../../locationList"
 import DormList from "./DormList"
+import { getHeapCodeStatistics } from "v8"
+import { LocationWithoutID, Location } from "../../types"
 
 const OnCampusHeading = () => (
   <Heading
@@ -19,9 +21,24 @@ const OnCampusHeading = () => (
 
 
 const OnCampus = () => {
-  const dorms = locationList.filter((x) => {
-    return ['North Campus', 'West Campus', 'Collegetown'].includes(x.region)
-  })
+  const [dorms, setDorms] = useState<Location[] | null>(null)
+  async function retrieveCampus(){
+    const locationQuery = query(collection(db, 'locations'))
+    const querySnapshot = await getDocs(locationQuery)
+
+    const dorms2 = querySnapshot.docs.map(doc => {
+      const dorm : Location = {...(doc.data() as LocationWithoutID), id: doc.id}
+      return dorm
+    }).filter((x) => {
+      return ['North Campus', 'West Campus', 'Collegetown'].includes(x.region)
+    })
+    setDorms(dorms2)
+  }
+
+  useEffect(() => {
+    retrieveCampus()
+  }, [])
+
   return (
     <VStack 
       spacing={4}
@@ -33,7 +50,7 @@ const OnCampus = () => {
         justify = {'space-around'}
         align = {'center'}
         >
-        <DormList dorms={dorms} /> 
+        <DormList dorms={dorms ? dorms : []} /> 
       </HStack>
     </VStack>
   )

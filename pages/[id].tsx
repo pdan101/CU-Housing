@@ -1,29 +1,45 @@
 import Layout from "../components/layout/Layout"
-import locationList from "../locationList"
-import reviewList from "../reviewList"
-import { Location, Review } from "../types/index"
+import { Location, LocationWithoutID, Review, ReviewWithoutID } from "../types/index"
 import { Checkbox, HStack, IconButton, Link, Text } from "@chakra-ui/react"
 import Info from "../components/oncampus/Info"
-
+import { db } from "../util/firebase"
+import { collection, FieldPath, getDocs, query, where } from "firebase/firestore"
+import { useEffect, useState } from "react"
 
 type Props = {
     locationData: Location
 }
 
 export default function Dorm({ locationData } : Props) {
-    const relevantReviews : Review[] = reviewList.filter(x => x.locationID === locationData.id)
+    const [reviews, setReviews] = useState<Review[] | null>(null)
+    async function getReviews(){
+        const reviewQuery = query(collection(db, 'reviews'), where("locationID", "==", locationData.id))
+        const querySnapshot = await getDocs(reviewQuery)
+        const relevantReviews : Review[] = querySnapshot.docs.map(doc => {
+            const review : Review = {...(doc.data() as ReviewWithoutID), id: doc.id}
+            return review
+        })
+        setReviews(relevantReviews)
+    }
+
+    useEffect(() => {
+        getReviews()
+    }, [])
+
     return (
         <Layout title={locationData.name}>
-            <Info dorm={locationData} reviews={relevantReviews}></Info>
+            <Info dorm={locationData} reviews={reviews ? reviews : []}></Info>
         </Layout>
     )
 }
 
-export function getStaticPaths() {
-    const paths = locationList.map(x => {
+export async function getStaticPaths() {
+    const locationQuery = query(collection(db, 'locations'))
+    const querySnapshot = await getDocs(locationQuery)
+    const paths = querySnapshot.docs.map(doc => {
         return {
             params: {
-                id: x.id
+                id: doc.id
             }
         }
     })
@@ -33,8 +49,13 @@ export function getStaticPaths() {
     }
 }
 
-export function getStaticProps(e: { params: { id: string } }){
-    const locationData = locationList.filter(x => x.id === e.params.id)
+export async function getStaticProps(e: { params: { id: string } }){
+    const locationQuery = query(collection(db, 'locations'))
+    const querySnapshot = await getDocs(locationQuery)
+    const locationData : Location[] = querySnapshot.docs.filter(doc => doc.id === e.params.id).map(doc => {
+        const location : Location = {...(doc.data() as LocationWithoutID), id: doc.id}
+        return location
+    })
     return {
         props: {
             locationData: locationData[0]
