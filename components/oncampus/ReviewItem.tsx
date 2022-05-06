@@ -34,20 +34,21 @@ const ReviewItem = ({ review }: Props) => {
             <StarIcon color="gray" />) : null}
 
         <p className='reviewerName'>{review.author}</p>
+      <p className="rec"><em>Recommened?</em> {review.recommend ? 'Yes' : 'No'}</p>
       </div>
-      <p className="rec">Recommened? {review.recommend ? 'Yes' : 'No'}</p>
-      <p>Pros:</p>
+      <p><em>Pros:</em></p>
       <ul>
         {review.pros.map(item => {
           return <li>{item}</li>
         })}
       </ul>
-      <p>Cons:</p>
+      <p><em>Cons:</em></p>
       <ul>
         {review.cons.map(item => {
           return <li>{item}</li>
         })}
       </ul>
+      <em>Review:</em>
       <p>{review.text}</p>
       <p>{review.date}</p>
       {review.okToContact && <Popover placement='top-start'>

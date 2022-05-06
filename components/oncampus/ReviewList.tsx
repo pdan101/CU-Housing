@@ -4,6 +4,7 @@ import Amenities from "./Amenities";
 import InfoHeader from "./InfoHeader";
 import ReviewItem from "./ReviewItem"
 import WrappedMap from "./WrappedMap";
+import ReviewDrawer from "../review/reviewDrawer";
 
 type Props = {
     readonly dorm: Location
@@ -26,7 +27,10 @@ function ReviewsList({dorm, reviews} : Props) {
           mapElement={<div style={{ height: "100%", width: "100%" }} />}
           loadingElement={<div style={{ height: "100%", width: "100%" }} />}></WrappedMap>
       </div>
+      <div className="reviewHeader">
       <h1 className="headerTitle">Reviews</h1>
+      <ReviewDrawer locationID={dorm.id}></ReviewDrawer>
+      </div>
       {reviews.map(data => {
         return <ReviewItem review={data}></ReviewItem>
       })}
