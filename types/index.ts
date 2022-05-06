@@ -22,6 +22,8 @@ export type ReviewWithoutID = {
   cons: string[]
   rating: number
   text: string
+  okToContact: boolean
+  email: string
 }
 
 export type Review = ReviewWithoutID & {
