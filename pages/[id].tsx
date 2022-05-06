@@ -30,7 +30,7 @@ export default function Dorm({ locationData } : Props) {
     return (
         <Layout title={locationData.name}>
             <Info dorm={locationData} reviews={reviews ? reviews : []}></Info>
-            <ReviewForm></ReviewForm>
+            <ReviewForm locationID={locationData.id}></ReviewForm>
         </Layout>
     )
 }

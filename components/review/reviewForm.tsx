@@ -7,8 +7,11 @@ import { stringify } from 'querystring'
 import { addDoc, collection } from 'firebase/firestore'
 import { Rating } from 'react-simple-star-rating'
 
+type Props = {
+  locationID: string
+}
 
-function ReviewForm() {
+function ReviewForm({locationID} : Props) {
   const [author, setAuthor] = useState("")
   const [email, setEmail] = useState("")
   const [pros, setPros] = useState("")
@@ -28,11 +31,12 @@ function ReviewForm() {
     const review = {
       author:author,
       email:email,
-      cons:cons,
-      pros:pros,
+      cons:cons.split(','),
+      pros:pros.split(','),
       text: text,
       recommend:rec,
-      rating:rating
+      rating:rating,
+      locationID:locationID
     }
 
     const reviewsRef = collection(db, "reviews")
@@ -59,7 +63,7 @@ function ReviewForm() {
         onClick={handleRating}
         ratingValue={rating}
         showTooltip
-        tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}/>
+        tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Perfect']}/>
     <FormLabel htmlFor='pros'>Would you recommend this place?</FormLabel>
     <RadioGroup>
       <HStack spacing='24px'>
@@ -67,9 +71,9 @@ function ReviewForm() {
         <Radio value="false" onChange={(e) => setRec(false)}>No</Radio>
       </HStack>
     </RadioGroup>
-    <FormLabel htmlFor='pros'>Pros</FormLabel>
+    <FormLabel htmlFor='pros'>Pros (Separate by commas)</FormLabel>
     <Input id='pros' value={pros} onChange={(e) => setPros(e.target.value)}/>
-    <FormLabel htmlFor='cons'>Cons</FormLabel>
+    <FormLabel htmlFor='cons'>Cons (Separate by commas)</FormLabel>
     <Input id='cons' value={cons} onChange={(e) => setCons(e.target.value)}/>
     <FormLabel htmlFor='pros'>Write a Review</FormLabel>
     <Input id='comments' value={text} onChange={(e) => setText(e.target.value)}/>
