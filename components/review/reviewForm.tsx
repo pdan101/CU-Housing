@@ -19,6 +19,7 @@ function ReviewForm({locationID} : Props) {
   const [text, setText] = useState("")
   const [rec, setRec] = useState(true)
   const [rating, setRating] = useState(0)
+  const [contact, setContact] = useState(false)
 
   const handleRating = (rate: number) => {
     setRating(rate/100 * 5)
@@ -36,7 +37,8 @@ function ReviewForm({locationID} : Props) {
       text: text,
       recommend:rec,
       rating:rating,
-      locationID:locationID
+      locationID:locationID,
+      okToContact:contact
     }
 
     const reviewsRef = collection(db, "reviews")
@@ -48,6 +50,7 @@ function ReviewForm({locationID} : Props) {
     setCons("")
     setPros("")
     setText("")
+    setContact(false)
   }
 
   return (
@@ -69,6 +72,13 @@ function ReviewForm({locationID} : Props) {
       <HStack spacing='24px'>
         <Radio value="true" onChange={(e) => setRec(true)}>Yes</Radio>
         <Radio value="false" onChange={(e) => setRec(false)}>No</Radio>
+      </HStack>
+    </RadioGroup>
+    <FormLabel htmlFor='pros'>Are you willing to be contacted?</FormLabel>
+    <RadioGroup>
+      <HStack spacing='24px'>
+        <Radio value="true" onChange={(e) => setContact(true)}>Yes</Radio>
+        <Radio value="false" onChange={(e) => setContact(false)}>No</Radio>
       </HStack>
     </RadioGroup>
     <FormLabel htmlFor='pros'>Pros (Separate by commas)</FormLabel>
