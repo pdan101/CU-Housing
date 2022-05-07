@@ -3,8 +3,9 @@ import About from "./About";
 import Amenities from "./Amenities";
 import InfoHeader from "./InfoHeader";
 import ReviewItem from "./ReviewItem"
-import WrappedMap from "./WrappedMap";
 import ReviewDrawer from "../review/reviewDrawer";
+import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps'
+
 
 type Props = {
     readonly dorm: Location
@@ -12,6 +13,20 @@ type Props = {
 }
 
 function ReviewsList({dorm, reviews} : Props) {
+  const Map = () => {
+    return (
+      <div style={{ width: "10vw", height: "10vh" }}>
+        <GoogleMap defaultZoom={17}
+          defaultCenter={{ lat: Number(dorm.lat), lng: Number(dorm.long) }}>
+          <Marker position={{ lat: Number(dorm.lat), lng: Number(dorm.long) }}
+          />
+        </GoogleMap>
+      </div>
+    );
+  }
+  
+const WrappedMap = withScriptjs(withGoogleMap(Map));
+
     return (
     <section className=''>
       <InfoHeader dorm={dorm} reviews={reviews}></InfoHeader>
