@@ -20,14 +20,6 @@ const navData: NavLinkData[] = [
   {
     name: "On-Campus",
     path: "/oncampus"
-  },
-  {
-    name: "Off-Campus",
-    path: "/offcampus"
-  },
-  {
-    name: "Sublets & Leases", 
-    path: "/subletsleases"
   }
 ]
 
